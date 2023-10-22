@@ -20,14 +20,15 @@ function parseData() {
   // Селекторы
   const linkSelector = 'a[itemprop="url"]';
   const titleSelector = 'h3[itemprop="name"], h1[itemprop="name"]';
-  const priceSelector = '[itemprop="price"]';
+  const priceSelector = '[itemprop="price"], p[data-marker="item-price"]';
   const descriptionSelector = 'div[data-marker="item-view/item-description"] p.styles-module-root-_KFFt';
-  const dateSelector = 'p[data-marker="item-date"]';
+  const dateSelector = 'p[class="styles-module-root-_KFFt styles-module-size_s-awPvv styles-module-size_s_dense-tybDA styles-module-size_s-_P6ZA styles-module-size_dense-z56yO stylesMarginDense-module-root-lyxCd stylesMarginDense-module-paragraph-s-Okkap styles-module-noAccent-nZxz7"], p[class="styles-module-root-_KFFt styles-module-size_s-awPvv styles-module-size_s-_P6ZA stylesMarningNormal-module-root-OSCNq stylesMarningNormal-module-paragraph-s-_c6vD styles-module-noAccent-nZxz7"]';
   const addressSelector = 'span.style-item-address__string-wt61A';
   const descriptionElementSelector = 'div[data-marker="item-view/item-description"]';
   const breadcrumbsSelector = 'div[data-marker="breadcrumbs"]';
   const characteristicsSelector = 'ul.params-paramsList-zLpAu';
   const sendDataSelector = 'a[data-marker="item-send-message-link"]';
+  const userLinkSelector = 'a[data-marker="seller-link/link"]';
 
   // Извлечение данных
   const linkElements = document.querySelectorAll(linkSelector);
@@ -39,6 +40,7 @@ function parseData() {
   const descriptionElement = document.querySelector(descriptionElementSelector);
   const breadcrumbsElement = document.querySelector(breadcrumbsSelector);
   const characteristicsElement = document.querySelector(characteristicsSelector);
+  const userLinkElement = document.querySelector(userLinkSelector);
 
   // Применение стилей к выделенным элементам
   linkElements.forEach(element => {
@@ -83,6 +85,17 @@ function parseData() {
     });
   }
 
+  if (userLinkElement) {
+    userLinkElement.style.color = 'red';
+
+    const username = userLinkElement.querySelector('span').innerText;
+    const userLink = userLinkElement.getAttribute('href');
+
+    // Добавляем данные к объекту data
+    data.username = username;
+    data.userLink = userLink;
+  }
+
   const sendDataElement = document.querySelector(sendDataSelector);
   if (sendDataElement) {
     sendDataElement.style.color = 'red';
@@ -98,7 +111,7 @@ function parseData() {
   data.address = Array.from(addressElements).map(addressElement => extractText(addressElement));
 
   if (descriptionElement) {
-    data.descriptionFull = Array.from(descriptionElement.querySelectorAll('p')).map(p => extractText (p));
+    data.descriptionFull = Array.from(descriptionElement.querySelectorAll('p')).map(p => extractText(p));
   }
 
   if (breadcrumbsElement) {
