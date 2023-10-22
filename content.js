@@ -13,6 +13,13 @@ function extractText(element) {
   return element.innerText.trim();
 }
 
+// Функция для удаления request param из URL
+function removeQueryParams(url) {
+  const urlObject = new URL(url);
+  urlObject.search = '';
+  return urlObject.toString();
+}
+
 // Функция для парсинга данных с помощью указанных селекторов
 function parseData() {
   const data = {};
@@ -104,17 +111,16 @@ function parseData() {
 
   // Создаем массив объектов объявлений
   const adsArray = [];
-
+  
   // Заполняем массив объявлений объектами, содержащими нужные поля
   for (let i = 0; i < linkElements.length; i++) {
     const adObject = {
-      link: extractAttribute(linkElements[i], 'href'),
+      link: removeQueryParams(extractAttribute(linkElements[i], 'href')), // Удаляем параметры запроса из ссылки
       title: extractText(titleElements[i]),
       price: extractText(priceElements[i]),
       description: extractText(descriptionElements[i]),
       date: extractText(dateElements[i]),
       address: extractText(addressElements[i])
-      // Добавь здесь другие поля объявления, если нужно
     };
     adsArray.push(adObject);
   }
