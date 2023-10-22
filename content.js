@@ -102,38 +102,35 @@ function parseData() {
     data.sendData = extractAttribute(sendDataElement, 'href');
   }
 
-  // Сохранение данных
-  data.link = Array.from(linkElements).map(linkElement => extractAttribute(linkElement, 'href'));
-  data.title = Array.from(titleElements).map(titleElement => extractText(titleElement));
-  data.price = Array.from(priceElements).map(priceElement => extractText(priceElement));
-  data.description = Array.from(descriptionElements).map(descriptionElement => extractText(descriptionElement));
-  data.date = Array.from(dateElements).map(dateElement => extractText(dateElement));
-  data.address = Array.from(addressElements).map(addressElement => extractText(addressElement));
+  // Создаем массив объектов объявлений
+  const adsArray = [];
 
-  if (descriptionElement) {
-    data.descriptionFull = Array.from(descriptionElement.querySelectorAll('p')).map(p => extractText(p));
+  // Заполняем массив объявлений объектами, содержащими нужные поля
+  for (let i = 0; i < linkElements.length; i++) {
+    const adObject = {
+      link: extractAttribute(linkElements[i], 'href'),
+      title: extractText(titleElements[i]),
+      price: extractText(priceElements[i]),
+      description: extractText(descriptionElements[i]),
+      date: extractText(dateElements[i]),
+      address: extractText(addressElements[i])
+      // Добавь здесь другие поля объявления, если нужно
+    };
+    adsArray.push(adObject);
   }
 
-  if (breadcrumbsElement) {
-    data.path = Array.from(breadcrumbsElement.querySelectorAll('span span')).map(span => extractText(span));
-  }
-
-  if (characteristicsElement) {
-    const characteristics = {};
-    characteristicsElement.querySelectorAll('li').forEach(li => {
-      const key = extractText(li.querySelector('span').nextSibling); // Извлекаем текст после span
-      const value = extractText(li);
-      characteristics[key] = value;
-    });
-    data.characteristics = characteristics;
-  }
+  // Создаем новый объект данных в формате ООП
+  const newData = {
+    count: adsArray.length,
+    array: adsArray
+  };
 
   // Извлечение текущей ссылки страницы
   const currentPageUrl = getCurrentPageUrl();
-  data.currentPageUrl = currentPageUrl;
+  newData.currentPageUrl = currentPageUrl;
 
-  // Отправка данных
-  chrome.runtime.sendMessage({ action: 'parseAndSendData', data: JSON.stringify(data) });
+  // Преобразовываем новый объект данных в JSON и отправляем его
+  chrome.runtime.sendMessage({ action: 'parseAndSendData', data: JSON.stringify(newData) });
 }
 
 // Вызываем функцию парсинга при загрузке страницы
