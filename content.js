@@ -28,7 +28,7 @@ function parseData() {
   const characteristicsSelector = 'ul.params-paramsList-zLpAu';
   const sendDataSelector = 'a[data-marker="item-send-message-link"]';
   const userLinkSelector = 'a[data-marker="seller-link/link"]';
-  const internslPriceSelector = '[itemprop="price"]'; // Цена в объвлении
+  const internslPriceSelector = '[itemprop="price"]'; // Цена в объявлении
 
   // Извлечение элементов
   const linkElements = document.querySelectorAll(linkSelector);
@@ -55,7 +55,7 @@ function parseData() {
   priceElements.forEach(element => {
     element.style.color = 'red';
   });
-  
+
   internalPrice.forEach(element => {
     element.style.color = 'red';
   });
@@ -95,24 +95,26 @@ function parseData() {
   }
 
   // Вывод элементов в консоль в формате ООП
-  const adsArray = [];
-  for (let i = 0; i < linkElements.length; i++) {
+  const adsAnnouncements = [];
+
+  // Цикл для элементов linkElements
+  for (let i = 0; i < linkElements.length || i <1; i++) {
     const adObject = {
-      link: extractAttribute(linkElements[i], 'href'),
-      title: extractText(titleElements[i]),
-      price: extractText(priceElements[i]),
-      prices: extractText(internalPrice[i]),
-      description: extractText(descriptionElements[i]),
-      date: extractText(dateElements[i]),
-      address: extractText(addressElements[i]),
+      link: i < linkElements.length ? extractAttribute(linkElements[i], 'href') : '',
+      title: i < titleElements.length ? extractText(titleElements[i]) : '',
+      price: i < priceElements.length ? extractText(priceElements[i]) : '',
+      prices: i < internalPrice.length ? extractText(internalPrice[i]) : '',
+      description: i < descriptionElements.length ? extractText(descriptionElements[i]) : '',
+      date: i < dateElements.length ? extractText(dateElements[i]) : '',
+      address: i < addressElements.length ? extractText(addressElements[i]) : '',
     };
-    adsArray.push(adObject);
+    adsAnnouncements.push(adObject);
   }
 
   // Вывод общей информации в консоль
   const newData = {
-    count: adsArray.length,
-    array: adsArray
+    count: adsAnnouncements.length,
+    announcements: adsAnnouncements
   };
 
   const currentPageUrl = getCurrentPageUrl();
