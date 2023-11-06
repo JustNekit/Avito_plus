@@ -1,129 +1,143 @@
-function getCurrentPageUrl() {
-  return window.location.href;
-}
+window.onload = function(){
 
-function extractAttribute(element, attributeName) {
-  return element.getAttribute(attributeName);
-}
 
-function extractText(element) {
-  if (element && element.innerText) {
-    return element.innerText.trim();
+
+  var announcements = document.querySelectorAll('[data-marker=bx-recommendations-block-item]')
+  if(announcements==null || announcements.length==0)
+    announcements = document.querySelectorAll('[data-marker=item]')
+  
+    function getCategory(){
+    var category = []
+    var listCategory = document.querySelectorAll('[itemtype="http://schema.org/ListItem"]')
+    
+    listCategory.forEach((categoryItem) => {
+      var categoryItemName = categoryItem.querySelector('[itemprop="name"]').textContent;
+      if(!category.includes(categoryItemName))
+        category.push(categoryItemName)
+    })
+    
+    console.log(category)
+    return category
   }
-  return '';
-}
-
-function parseData() {
-  const data = {};
-
-  // Селекторы
-  const linkSelector = 'a[itemprop="url"]';
-  const titleSelector = 'h3[itemprop="name"], h1[itemprop="name"]';
-  const priceSelector = 'p[data-marker="item-price"]';
-  const descriptionSelector = 'div[data-marker="item-view/item-description"] p.styles-module-root-_KFFt';
-  const dateSelector = 'p[class="styles-module-root-_KFFt styles-module-size_s-awPvv styles-module-size_s_dense-tybDA styles-module-size_s-_P6ZA styles-module-size_dense-z56yO stylesMarginDense-module-root-lyxCd stylesMarginDense-module-paragraph-s-Okkap styles-module-noAccent-nZxz7"], p[class="styles-module-root-_KFFt styles-module-size_s-awPvv styles-module-size_s-_P6ZA stylesMarningNormal-module-root-OSCNq stylesMarningNormal-module-paragraph-s-_c6vD styles-module-noAccent-nZxz7"]';
-  const addressSelector = 'span.style-item-address__string-wt61A';
-  const descriptionElementSelector = 'div[data-marker="item-view/item-description"]';
-  const breadcrumbsSelector = 'div[data-marker="breadcrumbs"]';
-  const characteristicsSelector = 'ul.params-paramsList-zLpAu';
-  const sendDataSelector = 'a[data-marker="item-send-message-link"]';
-  const userLinkSelector = 'a[data-marker="seller-link/link"]';
-  const internslPriceSelector = '[itemprop="price"]'; // Цена в объявлении
-
-  // Извлечение элементов
-  const linkElements = document.querySelectorAll(linkSelector);
-  const titleElements = document.querySelectorAll(titleSelector);
-  const priceElements = document.querySelectorAll(priceSelector);
-  const descriptionElements = document.querySelectorAll(descriptionSelector);
-  const dateElements = document.querySelectorAll(dateSelector);
-  const addressElements = document.querySelectorAll(addressSelector);
-  const descriptionElement = document.querySelector(descriptionElementSelector);
-  const breadcrumbsElement = document.querySelector(breadcrumbsSelector);
-  const characteristicsElement = document.querySelector(characteristicsSelector);
-  const userLinkElement = document.querySelector(userLinkSelector);
-  const internalPrice = document.querySelectorAll(internslPriceSelector);
-
-  // Применение стилей к выделенным элементам
-  linkElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  titleElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  priceElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  internalPrice.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  descriptionElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  dateElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  addressElements.forEach(element => {
-    element.style.color = 'red';
-  });
-
-  if (descriptionElement) {
-    descriptionElement.querySelectorAll('p').forEach(p => {
-      p.style.color = 'red';
-    });
-  }
-
-  if (breadcrumbsElement) {
-    breadcrumbsElement.querySelectorAll('a').forEach(a => {
-      a.style.color = 'red';
-    });
-  }
-
-  if (characteristicsElement) {
-    characteristicsElement.querySelectorAll('li').forEach(li => {
-      li.style.color = 'red';
-    });
-  }
-
-  if (userLinkElement) {
-    userLinkElement.style.color = 'red';
-  }
-
-  // Вывод элементов в консоль в формате ООП
-  const adsAnnouncements = [];
-
-  // Цикл для элементов linkElements
-  for (let i = 0; i < linkElements.length || i <1; i++) {
-    const adObject = {
-      link: i < linkElements.length ? extractAttribute(linkElements[i], 'href') : '',
-      title: i < titleElements.length ? extractText(titleElements[i]) : '',
-      price: i < priceElements.length ? extractText(priceElements[i]) : '',
-      prices: i < internalPrice.length ? extractText(internalPrice[i]) : '',
-      description: i < descriptionElements.length ? extractText(descriptionElements[i]) : '',
-      date: i < dateElements.length ? extractText(dateElements[i]) : '',
-      address: i < addressElements.length ? extractText(addressElements[i]) : '',
+  
+  var ads = []
+  
+  
+  announcements.forEach((announcement) => {
+    var name = announcement.querySelector("[itemprop=name]").textContent;
+  
+    var priceCurrency = announcement.querySelector("[itemprop=priceCurrency]").content
+    var price = announcement.querySelector("[itemprop=price]").content
+    var url = announcement.querySelector("a[itemprop=url]").href
+    var place = announcement.querySelector("[class*=geo-root]").querySelector("span").textContent
+  
+    var xx = announcement.querySelector("[itemprop=description]");
+    var desc = xx===null ? "empty" : xx.content;
+    
+    var yy = announcement.querySelector("[data-marker=item-date]")
+    if(yy === null){
+     // yy = announcement.querySelectorAll("p")[2]
+     // console.log(yy)
+    }
+    
+    var itemDate = yy === null ? "01.01.1970" : yy.textContent
+  
+  
+  
+  
+    var urlIndex = url.indexOf("?")
+    urlIndex = urlIndex == -1 ? url.length : urlIndex
+  
+    url = url.substring(0,urlIndex)
+  
+    let output = {
+      category: getCategory(),
+      name: name,
+      description: desc,
+      priceCurrency: priceCurrency,
+      price: price,
+      url: url,
+      date: itemDate,
+      place: place
     };
-    adsAnnouncements.push(adObject);
+  
+    ads.push(output)
+  
+  //	console.log(JSON.stringify(output,null,2))
+  });
+  
+  //----------------------------------------------
+  //----------------------------------------------
+  //----------------------------------------------
+  if(announcements.length==0){
+    var name = document.querySelector("h1[itemprop=name]").textContent;
+  
+    var priceCurrency = document.querySelector("[itemprop=priceCurrency]").content
+    var price = document.querySelector('span[itemprop="price"]').textContent
+    var url = window.location.href
+    var place = document.querySelector('span[class="style-item-address__string-wt61A"]').textContent
+    var specifications = document.querySelector('ul[class="params-paramsList-zLpAu"]').textContent
+  
+    var xx = document.querySelector('[data-marker="item-view/item-description"]');
+   
+    var desc = xx===null ?  "empty" : xx.textContent ;
+   
+    
+  
+    var yy = document.querySelector("[data-marker=item-date]")
+    if(yy === null){
+     // yy = announcement.querySelectorAll("p")[2]
+     // console.log(yy)
+    }
+    
+    var itemDate = yy === null ? "01.01.1970" : yy.textContent
+  
+  
+  
+  
+    var urlIndex = url.indexOf("?")
+    urlIndex = urlIndex == -1 ? url.length : urlIndex
+  
+    url = url.substring(0,urlIndex)
+  
+    let output = {
+      category: getCategory(),
+      specifications:specifications,
+      name: name,
+      description: desc,
+      priceCurrency: priceCurrency,
+      price: price,
+      url: url,
+      date: itemDate,
+      place: place
+    };
+  
+    ads.push(output)
   }
-
-  // Вывод общей информации в консоль
+  
+  
+  
   const newData = {
-    count: adsAnnouncements.length,
-    announcements: adsAnnouncements
+    count: ads.length,
+    advertisements: ads
   };
-
-  const currentPageUrl = getCurrentPageUrl();
-  newData.currentPageUrl = currentPageUrl;
-
-  console.log(JSON.stringify(newData, null, 2)); // Вывод newData в консоль в виде JSON
-
-  // Отправка данных
-  chrome.runtime.sendMessage({ action: 'parseAndSendData', data: newData });
-}
-
-parseData();
+  
+  console.log(JSON.stringify(newData, null, 2));
+  
+  
+  
+  var host = 'https://api.sadykoff.ru'
+  // host = 'http://localhost:8080'
+  
+  fetch(host+'/api/v1/add', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newData)
+  }).then(res => res.json())
+    .then(res => console.log(res));
+  
+  
+  }
