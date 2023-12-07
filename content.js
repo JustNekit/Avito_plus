@@ -127,7 +127,7 @@ window.onload = function(){
   
   
   var host = 'https://api.sadykoff.ru'
-  // host = 'http://localhost:8080'
+  // host = 'http://localhost:8080'/
   
   fetch(host+'/api/v1/add', {
     method: 'POST',
@@ -141,3 +141,88 @@ window.onload = function(){
   
   
   }
+
+// Слайдеры функций
+  var switches = document.querySelectorAll('.switch');
+  
+    switches.forEach(function (switchElement) {
+      var checkbox = switchElement.querySelector('.checkbox');
+      var slider = switchElement.querySelector('.slider');
+  
+      checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          switchElement.classList.add('checked');
+        } else {
+          switchElement.classList.remove('checked');
+        }
+      });
+    });
+
+// Пример: вставка текста в элемент с id "price-info" на странице Avito
+// var priceInfo = document.getElementById("itemprop=price");
+// priceInfo.innerHTML = "Цена соответствует рыночной";
+// console.log("Текст вставлен");
+
+
+// Ваш код для внедрения на страницу Avito
+// Например, добавление надписи "проверено"
+// document.body.insertAdjacentHTML('beforeend', '<h1 style="position: fixed; top: 1000px; left: 0; background: green; color: white; padding: 5px;">Проверено</h1>');
+
+// Поиск всех элементов с itemprop=price
+const priceElements = document.querySelectorAll('[itemprop="price"]');
+
+// Создание элемента с надписью "проверено"
+const createVerifiedLabel = () => {
+  const verifiedLabel = document.createElement('div');
+  verifiedLabel.textContent = '+';
+  verifiedLabel.style.position = 'relative';  // Используем относительное позиционирование
+  verifiedLabel.style.left = '50px';  // Отступ справа от цены
+  verifiedLabel.style.background = 'green';
+  verifiedLabel.style.color = 'white';
+  verifiedLabel.style.padding = '5px';
+  return verifiedLabel;
+};
+
+// Добавление надписи справа от каждого элемента с itemprop=price
+priceElements.forEach((priceElement) => {
+  const verifiedLabel = createVerifiedLabel();
+  
+  // Обертываем элемент с ценой и надписью в блок, чтобы можно было задать отступ
+  const wrapper = document.createElement('div');
+  wrapper.style.position = 'relative';
+  wrapper.appendChild(priceElement.cloneNode(true));
+  wrapper.appendChild(verifiedLabel);
+
+  priceElement.replaceWith(wrapper);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Слайдеры вкл/выкл (Починить)
+var switches1 = document.querySelectorAll('.switch1');
+  
+switches1.forEach(function (switch1Element) {
+  var checkbox1 = switch1Element.querySelector('.checkbox1');
+  var slider1 = switch1Element.querySelector('.slider1');
+
+  checkbox1.addEventListener('change1', function () {
+    if (checkbox1.checked) {
+      switch1Element.classList.add('checked1');
+    } else {
+      switch1Element.classList.remove('checked1');
+    }
+  });
+});

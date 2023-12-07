@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Grabber</title>
+    <link rel="stylesheet" type="text/css" href="popup.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="logo">
+        <button class="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M8.75 8.75L21.25 21.25M8.75 21.25L21.25 8.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </header>
+
+    <content>
+      <span class="status">Вкл</span>  
+      <h1>Фильтры</h1>
+
+        <div class="conteiner-filter">
+          <div class="conteiner-filter">
+            <div class="container">
+              <div class="text">Показывать уровень цены</div>
+              <div class="toggle-switch">
+                <label class="switch">
+                  <input type="checkbox" class="checkbox">
+                  <div class="slider"></div>
+                </label>
+              </div>
+            </div>
+          
+            <div class="container">
+              <div class="text">Показывать ключевые слова</div>
+              <div class="toggle-switch">
+                <label class="switch">
+                  <input type="checkbox" class="checkbox">
+                  <div class="slider"></div>
+                </label>
+              </div>
+            </div>
+          
+            <div class="container">
+              <div class="text">Показывать подозрительный аккаунт</div>
+              <div class="toggle-switch">
+                <label class="switch">
+                  <input type="checkbox" class="checkbox">
+                  <div class="slider"></div>
+                </label>
+              </div>
+            </div>
+          
+            <div class="container">
+              <div class="text">Показывать супер предложения</div>
+              <div class="toggle-switch">
+                <label class="switch">
+                  <input type="checkbox" class="checkbox">
+                  <div class="slider"></div>
+                </label>
+              </div>
+            </div>
+            <script src="content.js"></script>
+          </div>
+        </div>
+
+        <div class="button-reset-apply">
+            <button class="button-reset">Сбросить</button>
+            <button class="button-apply">Применить</button>
+        </div>
+
+        
+
+          <div class="toggle-switch1">
+              <label class="switch1">
+              <input type="checkbox1" class="checkbox1">
+              <div class="slider1"></div>
+            </label>
+          </div>
+
+
+
+
+    </content>
+</body>
+</html>
