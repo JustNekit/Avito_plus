@@ -1,0 +1,1 @@
+This is an extension for the Avito website that helps analyze prices and identify pricing anomalies. It was developed under the guidance of experienced mentors from UBRiR bank.
