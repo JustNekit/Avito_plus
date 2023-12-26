@@ -1,66 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
-
 body {
-    display: flex;
-    width: 450px;
-    height: 400px;
-    padding: 0px 30px 24px 30px;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  width: 450px;
+  height: 400px;
+  padding: 0px 30px 24px 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
 header {
-    /* display: flex;
-    width: 100%;
-    padding: 15px 30px;
-    justify-content: space-between;
-    align-items: center;
-    background: #FFF;
-    box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.18); */
+  /* display: flex;
+  width: 100%;
+  padding: 15px 30px;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFF;
+  box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.18); */
 
-    display: flex;
-    width: 465px;
-    padding: 15px 30px;
-    margin-top: -7px;
-    justify-content: space-between;
-    align-items: center;
-    background: #FFF;
-    box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.18);
+  display: flex;
+  width: 465px;
+  padding: 15px 30px;
+  margin-top: -7px;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFF;
+  box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.18);
 }
 
 .Close {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    margin-top: 4px;
-    border: none;
-    background: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  margin-top: 4px;
+  border: none;
+  background: none;
 }
 
 h1 {
-    color: #000;
-    font-family: Montserrat;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -10px;
 }
 
-/* .conteiner-filter {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-top: 24px;
+/*.conteiner-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 24px;
 } */
 
 .conteiner-filter{
@@ -74,182 +73,202 @@ content {
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .text {
-    color: #000;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
-/* .toggle-switch {
-    width: 20%;
+/*.toggle-switch {
+  width: 20%;
 } */
 
 .toggle-switch {
   margin-right: -370px;
   width: 20%; /* Ширина блока с переключателем */
 }
-
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
 }
 
 .checkbox {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 15px;
-    transition: .4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 15px;
+  transition: .4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
-    background-color: #FFFFFF;
-    border-radius: 50%;
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  transition: .4s;
 }
 
 .checked .slider {
-    border-radius: 100px;
-    background: #2ADC4C;
-    box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.28) inset;
+  border-radius: 100px;
+  background: #2ADC4C;
+  box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.28) inset;
 }
 
 .checked .slider:before {
-    transform: translateX(20px);
+  transform: translateX(20px);
 }
 
 .button-reset-apply {
-    display: flex;
-    gap: 16px;
-    margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .button-reset,
 .button-apply {
-    color: #000;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    display: flex;
-    padding: 8px 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: none;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  padding: 8px 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: none;
 }
 
 .button-reset {
-    background: #BDBDBD;
+  background: #BDBDBD;
 }
 
 .button-apply {
-    background: #B3F6AE;
+  background: #B3F6AE;
 }
-
-
-
-
-
-
-
-
 
 
 
 
 .toggle-switch1 {
-    margin-right: -330px;
-    width: 20%; /* Ширина блока с переключателем */
-  }
+  margin-right: -330px;
+  margin-top: 24px;
+  width: 20%; /* Ширина блока с переключателем */
+}
   
-  .switch1 {
-      position: relative;
-      display: inline-block;
-      width: 56px;
-      height: 24px;
-  }
+.switch1 {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 24px;
+}
   
-  .checkbox1 {
-      opacity: 0;
-      width: 0;
-      height: 0;
-  }
+.checkbox1 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+ 
+.slider1 {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333;
+  border-radius: 15px;
+  transition: .4s;
+}
   
-  .slider1 {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #333;
-      border-radius: 15px;
-      transition: .4s;
-  }
+.slider1:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: .4s;
+}
   
-  .slider1:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 2px;
-      bottom: 2px;
-      background-color: #ffffff;
-      border-radius: 50%;
-      transition: .4s;
-  }
+.checked1 .slider1 {
+  border-radius: 100px;
+  background: #2ADC4C; 
+  box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.25) inset;
+}
   
-  .checked1 .slider1 {
-    border-radius: 100px;
-    background: #333;
-    
-    box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.25) inset;
-  }
-  
-  .checked1 .slider1:before {
-      transform: translateX(20px);
-  }
+.checked1 .slider1:before {
+  transform: translateX(32px);
+}
 
 
-  .status {
-    color: #ffffff;
-    text-align: center;
-    font-family: Montserrat;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    position: absolute;
-    top: 370px;
-    left: 435px;
-    z-index: 20;
-  }
+.labels {
+  color: #ffffff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 10px;
+  width: 100%;
+  height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+  top: 5px;
+  z-index: 20;
+}
+
+.labels::after {
+  content: attr(data-off);
+  position: absolute;
+  left: 18px;
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.labels::before {
+  content: attr(data-on);
+  position: absolute;
+  left: 0;
+  color: #ffffff;
+  opacity: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+input:checked~.labels::after {
+  opacity: 0;
+}
+
+input:checked~.labels::before {
+  opacity: 1;
+}
