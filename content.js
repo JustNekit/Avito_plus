@@ -126,7 +126,7 @@ window.onload = function () {
     });
 
 
-    function getDataFromServer(url, newDiv,body) {
+    function getDataFromServer(url, newDiv, priceContainer, greenArrows, redArrows, priceee) {
         fetch(host + '/api/v1/info?link=' + url, {
             method: 'GET',
             headers: {
@@ -138,25 +138,41 @@ window.onload = function () {
             .then(res => {
                 if (res.status === 200) {
                     console.log(res.data)
-                    var meanPrice = Number.parseInt(res.data.mean.toFixed(0))
-                    meanPrice = new Intl.NumberFormat('ru-RU').format(meanPrice)
-                    newDiv.textContent = 'Средняя цена = '+meanPrice
-                    var keywords = res.data.keyWords
-                    var keyWordsElement = addKeyWordsInfo(keywords);
-                    body.appendChild(keyWordsElement)
+                    var meanPriceInt = Number.parseInt(res.data.mean.toFixed(0))
+                    var meanPrice = new Intl.NumberFormat('ru-RU').format(meanPriceInt)
+                    newDiv.textContent = 'Средняя цена = ' + meanPrice
+                    newDiv.innerHTML = '</b> Средняя цена = ' + meanPrice + ' </b> <a href="'+host+'/api/v1/why?link='+url+'">?</a>'
 
-                } else {
-                    console.log('no data')
+                    var keywords = res.data.keyWords
+                    var keyWordsElement = addKeyWordsInfo(keywords, greenArrows, redArrows, meanPriceInt, priceee);
+                    priceContainer.appendChild(keyWordsElement)
+
                 }
             });
     }
 
-    function addKeyWordsInfo(keywords) {
+    function addKeyWordsInfo(keywords, greenArrows, redArrows, meanPriceInt, priceee) {
         var keyWordsElement = document.createElement("div");
+        keyWordsElement.className = "keyWords"
+        keyWordsElement.style.display = "flex";
+
+        if (meanPriceInt < priceee)
+            keyWordsElement.appendChild(redArrows)
+        else
+            keyWordsElement.appendChild(greenArrows)
+
         keywords.forEach((word) => {
 
             var keyWordDiv = document.createElement("div");
             keyWordDiv.innerHTML = word;
+            keyWordDiv.style.justifyContent = "center"; // Align images to the end (right side)
+            keyWordDiv.style.top = "20px";
+            keyWordDiv.style.right = "0px";
+            keyWordDiv.style.borderTopLeftRadius = "50px";
+            keyWordDiv.style.borderBottomLeftRadius = "50px";
+            keyWordDiv.style.padding = "5px";
+            keyWordDiv.style.marginRight = "15px";
+
             keyWordDiv.style.backgroundColor = "black";
             keyWordDiv.style.textAlign = "center";
             keyWordDiv.style.borderRadius = "50px";
@@ -177,6 +193,7 @@ window.onload = function () {
 
     function addInfo(adv) {
         var body = adv.querySelector('div[class^="iva-item-body"]')
+        var priceContainer = adv.querySelector('span[class^=price-root]')
 
         var infoBlock = body.querySelector('div[class^="avito-info"]')
         if (infoBlock == null) {
@@ -184,12 +201,11 @@ window.onload = function () {
 
             var newDiv = document.createElement('div');
             newDiv.className = 'avito-info'
-            newDiv.textContent = 'no data';
+            // newDiv.textContent = 'no data';
             newDiv.style.position = "relative"; // Set the container position to relative
             newDiv.style.display = "flex"; // Use flex to align images horizontally
             newDiv.style.justifyContent = "flex-end"; // Align images to the end (right side)
 
-            getDataFromServer(url, newDiv,body);
 
             var starSVG = document.createElement("img");
             starSVG.style.paddingRight = "8px";
@@ -212,11 +228,12 @@ window.onload = function () {
             noData.alt = "Fifth Image";
 
 
+            getDataFromServer(url, newDiv, priceContainer, greenArrows, redArrows, getPriceValue(adv));
 
-            body.appendChild(starSVG)
-            body.appendChild(greenArrows)
-            body.appendChild(redArrows)
-            body.appendChild(noData)
+            // body.appendChild(starSVG)
+            // body.appendChild(greenArrows)
+            // body.appendChild(redArrows)
+            // body.appendChild(noData)
             body.appendChild(newDiv);
         }
     }
@@ -365,9 +382,6 @@ window.onload = function () {
                         createA.appendChild(createAText);
                         imageContainer.appendChild(createA);
 
-                    } else {
-                        info.textContent = "no data"
-                        imageContainer.appendChild(image4);
                     }
                 });
 
