@@ -4,8 +4,7 @@
   "version": "1.0",
   "description": "Парсер",
   "permissions": [
-    "https://www.avito.ru/*",
-    "http://api.site.ru/savedata"
+    "https://www.avito.ru/*"
   ],
   "background": {
     "scripts": ["background.js"],
