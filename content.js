@@ -1,6 +1,6 @@
 window.onload = function () {
 
-    var debug = true
+    var debug = !true
 
     var host = 'https://api.sadykoff.ru';
 
