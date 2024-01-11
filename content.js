@@ -191,25 +191,9 @@ window.onload = function () {
 
     keywords.forEach((word) => {
       var keyWordDiv = document.createElement("div");
-      keyWordDiv.innerHTML = word;
-      keyWordDiv.style.justifyContent = "center"; // Align images to the end (right side)
-      keyWordDiv.style.top = "20px";
-      keyWordDiv.style.right = "0px";
-      keyWordDiv.style.borderTopLeftRadius = "50px";
-      keyWordDiv.style.borderBottomLeftRadius = "50px";
-      keyWordDiv.style.padding = "5px";
-      keyWordDiv.style.marginRight = "15px";
 
-      keyWordDiv.style.backgroundColor = "black";
-      keyWordDiv.style.textAlign = "center";
-      keyWordDiv.style.borderRadius = "50px";
-      keyWordDiv.style.paddingLeft = "8px";
-      keyWordDiv.style.paddingRight = "8px";
-      keyWordDiv.style.fontSize = "12px";
-      keyWordDiv.style.fontFamily = "Montserrat";
-      keyWordDiv.style.display = "flex";
-      keyWordDiv.style.alignItems = "center";
-      keyWordDiv.style.color = "white";
+      keyWordDiv.innerHTML = word;
+      keyWordDiv.classList.add("keyword-item");
 
       keyWordsElement.appendChild(keyWordDiv);
     });
