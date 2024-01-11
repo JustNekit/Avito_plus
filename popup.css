@@ -163,6 +163,7 @@ content {
   gap: 10px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
 }
 
 .button-reset {
